@@ -24,7 +24,7 @@ export const ApiStack = ({ stack }: StackContext) => {
       },
     },
     routes: {
-      "POST /": "packages/functions/src/lambda.handler",
+      "GET /questions": "packages/functions/src/get-questions.handler",
     }
   }
   );
