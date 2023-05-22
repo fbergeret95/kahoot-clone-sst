@@ -1,4 +1,4 @@
-import { Cognito, StackContext, StaticSite, use } from "sst/constructs";
+import { StackContext, StaticSite, use } from "sst/constructs";
 import { ApiStack } from "./api.stack";
 import { CognitoStack } from './cognito.stack';
 
