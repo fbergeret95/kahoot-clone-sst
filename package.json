@@ -12,13 +12,17 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "sst": "^2.8.21",
+    "@tsconfig/node16": "^1.0.4",
+    "@types/aws-lambda": "^8.10.115",
     "aws-cdk-lib": "2.72.1",
     "constructs": "10.1.156",
-    "typescript": "^5.0.4",
-    "@tsconfig/node16": "^1.0.4"
+    "sst": "^2.8.21",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@middy/core": "^4.4.3",
+    "@middy/http-json-body-parser": "^4.4.3",
+    "@middy/validator": "^4.4.3",
     "kysely": "^0.24.2",
     "kysely-data-api": "^0.2.0"
   },
