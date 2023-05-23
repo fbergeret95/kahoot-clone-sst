@@ -9,6 +9,7 @@ export const PostgresStack = ({ stack }: StackContext) => {
       maxCapacity: 'ACU_2',
     },
     migrations: 'services/migrations',
+    types: "services/migrations/types.ts",
   });
 
   return {
