@@ -26,7 +26,8 @@
     "@middy/http-json-body-parser": "^4.4.3",
     "@middy/validator": "^4.4.3",
     "kysely": "^0.24.2",
-    "kysely-data-api": "^0.2.0"
+    "kysely-data-api": "^0.2.0",
+    "gatsby": "^5.9.1"
   },
   "workspaces": [
     "packages/*"

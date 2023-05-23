@@ -13,11 +13,11 @@ export function FrontendStack({ stack, app }: StackContext) {
     errorPage: "redirect_to_index_page",
     environment: {
       // Pass in the API endpoint to our app
-      REACT_APP_API_URL: api.url,
-      REACT_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || '',
-      REACT_APP_REGION: app.region,
-      REACT_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
-      REACT_APP_USER_POOL_ID: auth.userPoolId,
+      GATSBY_APP_API_URL: api.url,
+      GATSBY_APP_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || '',
+      GATSBY_APP_REGION: app.region,
+      GATSBY_APP_USER_POOL_CLIENT_ID: auth.userPoolClientId,
+      GATSBY_APP_USER_POOL_ID: auth.userPoolId,
     },
   });
 
