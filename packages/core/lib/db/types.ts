@@ -1,3 +1,9 @@
+export interface Answers {
+  user_alias: string;
+  question_id: number;
+  option_id: number;
+}
+
 export interface Options {
   id: number;
   question_id: number;
@@ -11,6 +17,7 @@ export interface Questions {
 }
 
 export interface Database {
+  answers: Answers;
   options: Options;
   questions: Questions;
 }
