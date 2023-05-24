@@ -8,8 +8,8 @@ export const PostgresStack = ({ stack }: StackContext) => {
       minCapacity: 'ACU_2',
       maxCapacity: 'ACU_2',
     },
-    migrations: 'services/migrations',
-    types: "services/migrations/types.ts",
+    migrations: 'packages/core/lib/db/migrations',
+    types: "packages/core/lib/db/types.ts",
   });
 
   return {

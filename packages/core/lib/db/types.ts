@@ -1,13 +1,13 @@
 export interface Answers {
   id: number;
-  question_id: number | null;
-  text: string | null;
-  is_right: boolean | null;
+  question_id: number;
+  text: string;
+  is_right: boolean;
 }
 
 export interface Questions {
   id: number;
-  text: string | null;
+  text: string;
 }
 
 export interface Database {

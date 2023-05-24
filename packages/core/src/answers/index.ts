@@ -1,1 +1,1 @@
-export { Answer } from './types';
+export { Answer, FullAnswer } from './types';

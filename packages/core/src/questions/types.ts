@@ -3,10 +3,10 @@ import { Answer } from '../answers';
 export type Question = {
   id: number,
   text: string,
-  answers: Array<Answer>
+  answers: Answer[]
 }
 
 export type Questions = {
   amount: number,
-  questions: [Question],
+  questions: Question[],
 }

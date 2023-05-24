@@ -7,15 +7,15 @@ export async function up(db) {
   await db.schema
     .createTable("questions")
     .addColumn("id", "integer", (col) => col.primaryKey())
-    .addColumn("text", "varchar")
+    .addColumn("text", "varchar", (col) => col.notNull())
     .execute();
 
   await db.schema
     .createTable("answers")
     .addColumn("id", "integer", (col) => col.primaryKey())
-    .addColumn("question_id", "integer", (col) => col.references("questions.id").onDelete("cascade"))
-    .addColumn("text", "varchar")
-    .addColumn("is_right", "boolean")
+    .addColumn("question_id", "integer", (col) => col.references("questions.id").onDelete("cascade").notNull())
+    .addColumn("text", "varchar", (col) => col.notNull())
+    .addColumn("is_right", "boolean", (col) => col.notNull())
     .execute()
 }
 
