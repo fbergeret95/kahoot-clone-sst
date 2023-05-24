@@ -11,7 +11,7 @@ export async function up(db) {
     .execute();
 
   await db.schema
-    .createTable("answers")
+    .createTable("options")
     .addColumn("id", "integer", (col) => col.primaryKey())
     .addColumn("question_id", "integer", (col) => col.references("questions.id").onDelete("cascade").notNull())
     .addColumn("text", "varchar", (col) => col.notNull())
@@ -23,6 +23,6 @@ export async function up(db) {
  * @param db {Kysely<any>}
  */
 export async function down(db) {
-  await db.schema.dropTable("answers").execute();
+  await db.schema.dropTable("options").execute();
   await db.schema.dropTable("questions").execute();
 }

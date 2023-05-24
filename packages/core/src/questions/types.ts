@@ -1,9 +1,16 @@
-import { Answer } from '../answers';
+import { Options } from "../../lib/db/types"
+
+export type Option = {
+  id: number,
+  text: string,
+}
+
+export type FullOption = Options
 
 export type Question = {
   id: number,
   text: string,
-  answers: Answer[]
+  options: Option[]
 }
 
 export type Questions = {

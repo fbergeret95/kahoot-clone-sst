@@ -1,4 +1,4 @@
-export interface Answers {
+export interface Options {
   id: number;
   question_id: number;
   text: string;
@@ -11,6 +11,6 @@ export interface Questions {
 }
 
 export interface Database {
-  answers: Answers;
+  options: Options;
   questions: Questions;
 }

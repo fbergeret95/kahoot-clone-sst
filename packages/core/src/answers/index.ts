@@ -1,1 +1,0 @@
-export { Answer, FullAnswer } from './types';
