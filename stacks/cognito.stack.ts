@@ -1,8 +1,10 @@
-import { Cognito, StackContext } from 'sst/constructs';
+import { Cognito, StackContext, use } from 'sst/constructs';
 import { RemovalPolicy } from 'aws-cdk-lib';
 import { isProduction } from './utils/env';
+import { PostgresStack } from './postgres.stack';
 
 export const CognitoStack = ({ stack, app }: StackContext) => {
+  const { PostgresDatabase: kahootDb } = use(PostgresStack);
   // Create a Cognito User Pool and Identity Pool
   const auth = new Cognito(stack, 'Auth', {
     login: ['email', 'username', 'preferredUsername'],
@@ -19,6 +21,14 @@ export const CognitoStack = ({ stack, app }: StackContext) => {
         },
       },
     },
+    triggers: {
+      postConfirmation: 'packages/functions/src/user-registered.handler',
+    },
+    defaults: {
+      function: {
+        bind: [kahootDb],
+      }
+    }
   });
 
   // Show the auth resources in the output

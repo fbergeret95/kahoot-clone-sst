@@ -1,1 +1,1 @@
-export { postAnswer } from "./post-answer";
+export { createAnswer } from "./create-answer";

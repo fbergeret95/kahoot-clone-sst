@@ -3,5 +3,5 @@ export type Answer = {
   option_id: number,
   start: string,
   end: string,
-  alias: string
+  username: string
 }

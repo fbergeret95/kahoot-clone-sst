@@ -19,25 +19,24 @@ class SignUp_Component extends React.Component {
   }
   signUp = () => {
     const { username, password, email } = this.state
-    
+
     Auth.signUp({
-        username,
-        password,
-        attributes: {
-            email
-            // 'custom:favorite_flavor': 'Cookie Dough' - custom attribute, not standard
-        }
+      username,
+      password,
+      attributes: {
+        email
+      }
     })
-    .then(() => this.setState({ showConfirmation: true }))
-    .catch(err => {
-      console.log('error signing up: ', err)
-      this.props.updateErrorMessage(err.message)
-    })
+      .then(() => this.setState({ showConfirmation: true }))
+      .catch(err => {
+        console.log('error signing up: ', err)
+        this.props.updateErrorMessage(err.message)
+      })
   }
   confirmSignUp = () => {
     Auth.confirmSignUp(this.state.username, this.state.authCode)
-    .then(() =>       this.props.updateErrorMessage("User SignedIn"))
-    .catch(err => console.log('error confirming signing up: ', err))
+      .then(() => this.props.updateErrorMessage("User SignedIn"))
+      .catch(err => console.log('error confirming signing up: ', err))
   }
   render() {
     const { showConfirmation } = this.state
