@@ -5,7 +5,7 @@ import { isProduction } from './utils/env';
 export const CognitoStack = ({ stack, app }: StackContext) => {
   // Create a Cognito User Pool and Identity Pool
   const auth = new Cognito(stack, 'Auth', {
-    login: ['email'],
+    login: ['email', 'username', 'preferredUsername'],
     cdk: {
       userPool: {
         // Retain cognito instance in production only
