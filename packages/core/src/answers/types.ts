@@ -1,4 +1,7 @@
 export type Answer = {
-  id: number,
-  text: string,
+  question_id: number,
+  option_id: number,
+  start: string,
+  end: string,
+  username: string
 }
