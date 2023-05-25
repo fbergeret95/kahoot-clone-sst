@@ -25,11 +25,18 @@
     "@middy/core": "^4.4.3",
     "@middy/http-json-body-parser": "^4.4.3",
     "@middy/validator": "^4.4.3",
+    "aws-cli": "^0.0.2",
+    "aws-sdk": "^2.1383.0",
+    "gatsby": "^5.9.1",
+    "glamor": "^2.20.40",
     "kysely": "^0.24.2",
-    "kysely-data-api": "^0.2.0",
-    "gatsby": "^5.9.1"
+    "kysely-data-api": "^0.2.0"
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "description": "A simple quiz app inspired by [Kahoot](https://kahoot.it/) and built on SST with Gatsby.",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

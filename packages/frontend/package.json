@@ -22,7 +22,7 @@
     "bootstrap": "^5.2.3",
     "gatsby": "^5.9.1",
     "gatsby-plugin-theme-ui": "^0.15.7",
-    "glamor": "^2.20.40",
+    "glamor": "^2.17.9",
     "jquery": "^3.7.0",
     "popper.js": "^1.16.1",
     "react": "^18.2.0",
