@@ -9,6 +9,17 @@ Amplify.configure({
     region: process.env.GATSBY_APP_REGION,
     userPoolId: process.env.GATSBY_APP_USER_POOL_ID,
     userPoolWebClientId: process.env.GATSBY_APP_USER_POOL_CLIENT_ID,
+  },
+  API: {
+    endpoints: [
+      {
+        name: "KahootCloneAPI",
+        endpoint: process.env.GATSBY_APP_API_URL,
+        custom_header: async () => {
+          return { Authorization: `Bearer ${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
+        }
+      }
+    ]
   }
 });
 
@@ -33,7 +44,6 @@ const IndexPage = () => {
   return (
     <main style={pageStyles}>
       <img style={imageStyle} src={logo} alt="Logo" />
-
       <Authenticator_Component />
       {/* <Questions_Page></Questions_Page> */}
       {/* <QuestionZoneComponent></QuestionZoneComponent> */}
