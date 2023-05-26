@@ -2,7 +2,9 @@ import * as React from "react";
 import Authenticator_Component from "../Components/Authenticator_Component";
 import Questions_Page from "./questions_page";
 import QuestionZoneComponent from "./questionZone";
-import { Amplify, Auth } from 'aws-amplify';
+import { Amplify, Auth } from "aws-amplify";
+import { API } from "aws-amplify";
+
 Amplify.configure({
   // Auth: {
   //   mandatorySignIn: true,
@@ -15,12 +17,23 @@ Amplify.configure({
     region: process.env.GATSBY_APP_REGION,
     userPoolId: process.env.GATSBY_APP_USER_POOL_ID,
     userPoolWebClientId: process.env.GATSBY_APP_USER_POOL_CLIENT_ID,
-  }
+  },
+  API: {
+    endpoints: [
+      {
+        name: "auth",
+        endpoint: process.env.GATSBY_APP_REGION,
+        custom_header: async () => {
+          return {
+            Authorization: `Bearer ${(await Auth.currentSession())
+              .getAccessToken()
+              .getJwtToken()}`,
+          };
+        },
+      },
+    ],
+  },
 });
-
-
-
-
 
 const pageStyles = {
   color: "#232129",
@@ -41,8 +54,7 @@ const pageStyles = {
 // ];
 
 const IndexPage = () => {
-
-  console.log(process.env)
+  console.log(process.env);
   return (
     <main style={pageStyles}>
       <Authenticator_Component></Authenticator_Component>
