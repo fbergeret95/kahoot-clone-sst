@@ -25,7 +25,8 @@ export const ApiStack = ({ stack }: StackContext) => {
     },
     routes: {
       "GET /questions": "packages/functions/src/get-questions.handler",
-      "POST /answers": "packages/functions/src/post-answer.handler"
+      "POST /answers": "packages/functions/src/post-answer.handler",
+      "GET /results": "packages/functions/src/get-results.handler"
     }
   }
   );
