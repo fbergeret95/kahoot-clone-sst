@@ -4,7 +4,7 @@ import { Answer } from './types';
 
 export async function createAnswer(answer: Answer): Promise<GameStatus> {
   const { start, end, question_id, option_id, username } = answer;
-  const seconds = (new Date(end).getSeconds() - new Date(start).getSeconds())
+  const seconds = (new Date(end).getTime() - new Date(start).getTime()) / 1000
 
   const game_status = await checkGameStatus(username);
 
