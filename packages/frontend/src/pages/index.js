@@ -1,15 +1,9 @@
 import * as React from "react";
 import Authenticator_Component from "../Components/Authenticator_Component";
-import Questions_Page from "./questions_page";
-import QuestionZoneComponent from "./questionZone";
 import { Amplify, Auth } from 'aws-amplify';
+import logo from "../images/perficient_logo.png"
+
 Amplify.configure({
-  // Auth: {
-  //   mandatorySignIn: true,
-  //   region: "us-east-2",
-  //   userPoolId: "us-east-2_a72gsohA4",
-  //   userPoolWebClientId: "5qsmk4k4r31shhaks6p4mptrlc",
-  // }
   Auth: {
     mandatorySignIn: true,
     region: process.env.GATSBY_APP_REGION,
@@ -18,34 +12,29 @@ Amplify.configure({
   }
 });
 
-
-
-
-
 const pageStyles = {
   color: "#232129",
-  backgroundColor: "#E8E8DC",
+  backgroundColor: "#FFFFFF",
   height: "1000px",
   padding: 96,
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
 };
 
-// const endpoint_questionCards = [
-//   {
-//     q1: "Esta es la pregunta 1?",
-//     option1: "Opcion1",
-//     option2: "Opcion2",
-//     option3: "Opcion3",
-//     option4: "Opcion4",
-//   },
-// ];
+const imageStyle = {
+  display: "flex",
+  margin: "auto"
+}
+
 
 const IndexPage = () => {
+
 
   console.log(process.env)
   return (
     <main style={pageStyles}>
-      <Authenticator_Component></Authenticator_Component>
+      <img style={imageStyle} src={logo} alt="Logo" />
+
+      <Authenticator_Component />
       {/* <Questions_Page></Questions_Page> */}
       {/* <QuestionZoneComponent></QuestionZoneComponent> */}
       {/* <ul style={listStyles}>

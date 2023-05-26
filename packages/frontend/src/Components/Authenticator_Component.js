@@ -3,6 +3,8 @@ import { css } from 'glamor'
 import { Auth } from 'aws-amplify'
 import SignIn from './SignIn_Component'
 import SignUp from './SignUp_Component'
+import { navigate } from 'gatsby'
+
 // import ForgotPassword from './ForgotPassword'
 
 class Authenticator_Component extends React.Component {
@@ -26,6 +28,7 @@ class Authenticator_Component extends React.Component {
         // this.setState({errorMessage: null, currentState: 'showQuestions'})
         console.log('User Signed In', result)
         this.updateErrorMessage('User Signed In')
+        navigate("/questions_page")
       })
       .catch(error => {
         console.log('error getting current session...: ', error)
@@ -34,18 +37,18 @@ class Authenticator_Component extends React.Component {
 
   // getUserAuthenticated()
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserAuthenticated()
   }
 
   render() {
-    
+
     const { currentState } = this.state
 
     return (
       <div style={styles.container}>
-        { currentState === 'showSignIn'  && <SignIn {...this.props} updateErrorMessage={this.updateErrorMessage} />  }
-        { currentState === 'showSignUp' && <SignUp {...this.props} updateErrorMessage={this.updateErrorMessage} switchState={this.switchState} /> }
+        {currentState === 'showSignIn' && <SignIn {...this.props} updateErrorMessage={this.updateErrorMessage} />}
+        {currentState === 'showSignUp' && <SignUp {...this.props} updateErrorMessage={this.updateErrorMessage} switchState={this.switchState} />}
         {/* { currentState === 'showForgotPassword' && <ForgotPassword switchState={this.switchState} {...this.props} updateErrorMessage={this.updateErrorMessage} /> } */}
         <div {...css(styles.buttonContainer)}>
           {
@@ -54,18 +57,18 @@ class Authenticator_Component extends React.Component {
                 <p
                   onClick={() => this.switchState('showSignUp')}
                   {...css(styles.toggle)}
-                >Need an account? Sign Up</p>
+                >Necesitas una cuenta? Crea una aquí</p>
                 {/* <p
                   onClick={() => this.switchState('showForgotPassword')}
                   {...css(styles.toggle)}
                 >Forgot your password?</p> */}
               </div>
-                ) : (
+            ) : (
               <div {...css(styles.linkContainer)}>
                 <p
                   {...css(styles.toggle)}
                   onClick={() => this.switchState('showSignIn')}
-                >Already have an account? Sign In</p>
+                >Ya tienes una cuenta? Inicia sesión aquí</p>
               </div>
             )
           }
