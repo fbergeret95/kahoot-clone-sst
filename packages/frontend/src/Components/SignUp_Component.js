@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'glamor'
+import { navigate } from 'gatsby'
 
 import { Auth } from 'aws-amplify'
 
@@ -19,25 +20,24 @@ class SignUp_Component extends React.Component {
   }
   signUp = () => {
     const { username, password, email } = this.state
-    
+
     Auth.signUp({
-        username,
-        password,
-        attributes: {
-            email
-            // 'custom:favorite_flavor': 'Cookie Dough' - custom attribute, not standard
-        }
+      username,
+      password,
+      attributes: {
+        email
+      }
     })
-    .then(() => this.setState({ showConfirmation: true }))
-    .catch(err => {
-      console.log('error signing up: ', err)
-      this.props.updateErrorMessage(err.message)
-    })
+      .then(() => this.setState({ showConfirmation: true }))
+      .catch(err => {
+        console.log('error signing up: ', err)
+        this.props.updateErrorMessage(err.message)
+      })
   }
   confirmSignUp = () => {
     Auth.confirmSignUp(this.state.username, this.state.authCode)
-    .then(() =>       this.props.updateErrorMessage("User SignedIn"))
-    .catch(err => console.log('error confirming signing up: ', err))
+      .then(() => navigate("/questions_page"))
+      .catch(err => console.log('error confirming signing up: ', err))
   }
   render() {
     const { showConfirmation } = this.state
@@ -46,15 +46,15 @@ class SignUp_Component extends React.Component {
         {
           !showConfirmation && (
             <div {...css(styles.formContainer)}>
-              <h2 {...css(styles.signUpHeader)}>Sign Up</h2>
+              <h2 {...css(styles.signUpHeader)}>Crea tu cuenta</h2>
               <input
                 {...css(styles.input)}
-                placeholder='Username'
+                placeholder='Usuario'
                 onChange={evt => this.onChange('username', evt.target.value)}
               />
               <input
                 {...css(styles.input)}
-                placeholder='Password'
+                placeholder='Contraseña'
                 type='password'
                 onChange={evt => this.onChange('password', evt.target.value)}
               />
@@ -64,7 +64,7 @@ class SignUp_Component extends React.Component {
                 onChange={evt => this.onChange('email', evt.target.value)}
               />
               <div {...css(styles.button)} onClick={this.signUp}>
-                <p {...css(styles.buttonText)}>Sign Up</p>
+                <p {...css(styles.buttonText)}>Crear Cuenta</p>
               </div>
             </div>
           )
@@ -75,10 +75,10 @@ class SignUp_Component extends React.Component {
               <input
                 onChange={evt => this.onChange('authCode', evt.target.value)}
                 {...css(styles.input)}
-                placeholder='Confirmation Code'
+                placeholder='Código de Confirmación'
               />
               <div {...css(styles.button)} onClick={this.confirmSignUp}>
-                <p {...css(styles.buttonText)}>Confirm Sign Up</p>
+                <p {...css(styles.buttonText)}>Confirmar Código</p>
               </div>
             </div>
           )
@@ -95,13 +95,14 @@ const styles = {
   },
   button: {
     padding: '10px 60px',
-    backgroundColor: '#ffb102',
+    backgroundColor: '#bd3430',
+    marginTop: 10,
+    textAlign: 'center',
+    marginBottom: 10,
     cursor: 'pointer',
     borderRadius: '30px',
-    marginTop: 10,
-    marginBottom: 10,
     ':hover': {
-      backgroundColor: '#ffbb22'
+      backgroundColor: '#c34844'
     }
   },
   buttonText: {
@@ -129,7 +130,7 @@ const styles = {
     marginBottom: '10px',
     border: 'none',
     outline: 'none',
-    borderBottom: '2px solid #ffb102',
+    borderBottom: '2px solid #bd3430',
     fontSize: '16px',
     '::placeholder': {
       color: 'rgba(0, 0, 0, .3)'

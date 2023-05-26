@@ -35,8 +35,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "description": "A simple quiz app inspired by [Kahoot](https://kahoot.it/) and built on SST with Gatsby.",
-  "main": "index.js",
-  "author": "",
-  "license": "ISC"
+  "description": "A simple quiz app inspired by [Kahoot](https://kahoot.it/) and built on SST with Gatsby."
 }

@@ -3,6 +3,8 @@ import { css } from "glamor";
 import { Auth } from "aws-amplify";
 import SignIn from "./SignIn_Component";
 import SignUp from "./SignUp_Component";
+import { navigate } from "gatsby";
+
 // import ForgotPassword from './ForgotPassword'
 
 class Authenticator_Component extends React.Component {
@@ -25,6 +27,8 @@ class Authenticator_Component extends React.Component {
         // this.setState({errorMessage: null, currentState: 'showQuestions'})
         console.log("User Signed In", result);
         this.updateErrorMessage("User Signed In");
+        // navigate("/questions_page")
+        navigate("/score_page");
       })
       .catch((error) => {
         console.log("error getting current session...: ", error);
@@ -63,7 +67,7 @@ class Authenticator_Component extends React.Component {
                 onClick={() => this.switchState("showSignUp")}
                 {...css(styles.toggle)}
               >
-                Need an account? Sign Up
+                Necesitas una cuenta? Crea una aquí
               </p>
               {/* <p
                   onClick={() => this.switchState('showForgotPassword')}
@@ -76,7 +80,7 @@ class Authenticator_Component extends React.Component {
                 {...css(styles.toggle)}
                 onClick={() => this.switchState("showSignIn")}
               >
-                Already have an account? Sign In
+                Ya tienes una cuenta? Inicia sesión aquí
               </p>
             </div>
           )}

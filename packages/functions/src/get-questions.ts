@@ -3,11 +3,13 @@ import jsonBodyParser from '@middy/http-json-body-parser';
 import okResponse from "./utils/middy/ok-response";
 import { APIGatewayProxyEventV2WithJWTAuthorizer, APIGatewayProxyResult } from "aws-lambda";
 import { getQuestions } from "@kahoot-clone-sst/core/questions"
+import errorHandler from "./utils/middy/error-handler";
 
 type GetQuestionsRequest = Omit<APIGatewayProxyEventV2WithJWTAuthorizer, 'body'>;
 
 const lambda = async (event: GetQuestionsRequest): Promise<APIGatewayProxyResult> => {
-  const questions = await getQuestions();
+  const username = event.requestContext.authorizer.jwt.claims['cognito:username'] as string;
+  const questions = await getQuestions(username);
   return {
     statusCode: 200,
     body: JSON.stringify(questions)
@@ -18,4 +20,5 @@ export const handler = middy(lambda);
 
 handler
   .use(jsonBodyParser())
+  .use(errorHandler())
   .use(okResponse())
