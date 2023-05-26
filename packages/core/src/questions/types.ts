@@ -1,4 +1,5 @@
 import { Options } from "../../lib/db/types"
+import { GameStatus } from "../control"
 
 export type Option = {
   id: number,
@@ -16,4 +17,5 @@ export type Question = {
 export type Questions = {
   amount: number,
   questions: Question[],
+  game_status: GameStatus
 }
