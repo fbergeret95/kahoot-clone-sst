@@ -3,5 +3,5 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "frontend",
   },
-  plugins: ["gatsby-plugin-theme-ui"],
+  plugins: ["gatsby-plugin-theme-ui"]
 };
