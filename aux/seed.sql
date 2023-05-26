@@ -34,3 +34,6 @@ INSERT INTO answers(username, question_id, option_id, seconds)
 ('test3', 2, 7, 10),
 ('test3', 3, 12, 10);
 
+INSERT INTO control(id, "start", "end")
+  VALUES (1, now()::timestamp, now()::timestamp + INTERVAL '5 Minutes');
+

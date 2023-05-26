@@ -4,11 +4,19 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
 
+export type Timestamp = ColumnType<Date, Date | string, Date | string>;
+
 export interface Answers {
   username: string;
   question_id: number;
   option_id: number;
   seconds: Generated<number>;
+}
+
+export interface Control {
+  id: number;
+  start: Timestamp | null;
+  end: Timestamp | null;
 }
 
 export interface Options {
@@ -32,6 +40,7 @@ export interface Users {
 
 export interface Database {
   answers: Answers;
+  control: Control;
   options: Options;
   questions: Questions;
   users: Users;

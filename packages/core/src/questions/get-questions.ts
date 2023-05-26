@@ -1,6 +1,7 @@
 import { Question, Questions, Option, FullOption } from "./types";
 import { db } from "../../lib/db/db";
 import { sql } from "kysely";
+import { checkGameStatus } from "../control";
 
 // This parsing is necessary because each answer comes as a string 
 // from kysely-data-api (JSONB is not properly parsed)
@@ -25,7 +26,9 @@ function parseQuestions(questions: GetQuestionsQueryResult): Question[] {
   }))
 }
 
-export async function getQuestions(): Promise<Questions> {
+export async function getQuestions(username: string): Promise<Questions> {
+  const game_status = await checkGameStatus(username);
+
   const questions: GetQuestionsQueryResult = await db
     .selectFrom("questions as q")
     .select([
@@ -39,6 +42,7 @@ export async function getQuestions(): Promise<Questions> {
 
   return {
     amount: questions.length,
-    questions: parseQuestions(questions)
+    questions: parseQuestions(questions),
+    game_status
   }
 }
