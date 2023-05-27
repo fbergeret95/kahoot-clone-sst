@@ -32,7 +32,8 @@ class SignIn extends React.Component {
       })
       .catch(err => {
         console.log('error signing in...: ', err)
-        this.props.updateErrorMessage(err.message)
+        alert(err.message)
+        // this.props.updateErrorMessage(err.message)
       })
   }
   confirmSignIn = () => {

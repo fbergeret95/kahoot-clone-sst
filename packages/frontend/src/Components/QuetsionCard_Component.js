@@ -123,14 +123,16 @@ class Questions_Component extends React.Component {
       .catch((error) => {
 
         console.log(error)
-
-        if (error.response.data.error === 'GameNotConfigured') {
-          alert("El juego aún no ha comenzado")
-        } else if (error.response.data.error === 'GameFinished') {
-          console.log("GameFinished")
-          navigate("/score_page")
+        if (error.response.data === null) {
+          console.log("Uncaught error")
+        } else {
+          if (error.response.data.error === 'GameNotConfigured') {
+            alert("El juego aún no ha comenzado")
+          } else if (error.response.data.error === 'GameFinished') {
+            console.log("GameFinished")
+            navigate("/score_page")
+          }
         }
-
       });
   };
 
