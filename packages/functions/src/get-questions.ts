@@ -8,7 +8,8 @@ import errorHandler from "./utils/middy/error-handler";
 type GetQuestionsRequest = Omit<APIGatewayProxyEventV2WithJWTAuthorizer, 'body'>;
 
 const lambda = async (event: GetQuestionsRequest): Promise<APIGatewayProxyResult> => {
-  const username = event.requestContext.authorizer.jwt.claims['cognito:username'] as string;
+  const claims = event.requestContext.authorizer.jwt.claims;
+  const username = (claims['cognito:username'] || claims['username']) as string;
   const questions = await getQuestions(username);
   return {
     statusCode: 200,
