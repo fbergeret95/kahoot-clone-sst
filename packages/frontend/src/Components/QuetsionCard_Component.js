@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { navigate } from "gatsby";
-import { Auth } from "aws-amplify";
+
 import logo from "../images/perficient_logo.png";
+import { Amplify, Auth } from "aws-amplify";
 
 const pageStyles = {
   fontFamily: "Arial",
@@ -22,9 +23,10 @@ const cardStyles = {
   marginRight: "25%",
   borderRadius: "8px",
 };
-
 const customStyleBtn = {
   padding: "8px 16px",
+  margin: "2%",
+  minWidth: "400px",
   borderRadius: "9999px",
   backgroundColor: "#EC7063",
   color: "#fff",
@@ -35,217 +37,60 @@ const customStyleBtn = {
   transition: "background-color 0.3s",
 };
 
+
+
 const buttonStyles = {
   backgroundColor: "white",
 };
 
-// export default function QuestionCardComponent() {
-//   const fetchDataFromGetQuestions = [
-//     {
-//       amount: 2,
-//       questions: [
-//         {
-//           id: 1,
-//           text: "pregunta 1",
-//           options: [
-//             {
-//               id: 1,
-//               text: "respuesta incorrecta a pregunta 1",
-//             },
-//             {
-//               id: 2,
-//               text: "respuesta correcta a pregunta 1",
-//             },
-//           ],
-//         },
-//         {
-//           id: 2,
-//           text: "pregunta 2",
-//           options: [
-//             {
-//               id: 3,
-//               text: "respuesta incorrecta a pregunta 2",
-//             },
-//             {
-//               id: 4,
-//               text: "respuesta correcta a pregunta 2",
-//             },
-//           ],
-//         },
-//         {
-//           id: 3,
-//           text: "pregunta 3",
-//           options: [
-//             {
-//               id: 5,
-//               text: "respuesta incorrecta a pregunta 3",
-//             },
-//             {
-//               id: 6,
-//               text: "respuesta correcta a pregunta 3",
-//             },
-//           ],
-//         },
-//         {
-//           id: 4,
-//           text: "pregunta 4",
-//           options: [
-//             {
-//               id: 7,
-//               text: "respuesta incorrecta a pregunta 4",
-//             },
-//             {
-//               id: 8,
-//               text: "respuesta correcta a pregunta 4",
-//             },
-//           ],
-//         },
-//       ],
-//     },
-//   ];
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: process.env.GATSBY_APP_REGION,
+    userPoolId: process.env.GATSBY_APP_USER_POOL_ID,
+    userPoolWebClientId: process.env.GATSBY_APP_USER_POOL_CLIENT_ID,
+  },
+  API: {
+    endpoints: [
+      {
+        name: "KahootCloneAPI",
+        endpoint: process.env.GATSBY_APP_API_URL,
+        custom_header: async () => {
+          return {
+            Authorization: `Bearer ${(await Auth.currentSession())
+              .getAccessToken()
+              .getJwtToken()}`,
+          };
+        },
+      },
+    ],
+  },
+});
 
-//   const getQuestions = () => {
-//     let apiName = "KahootCloneAPI";
-//     let path = "/questions";
-
-//     API.get(apiName, path)
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((error) => {});
-//   };
-
-//   const [questionsData, setQuestionsData] = useState(null);
-
-//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-//   const currentQuestionSet = fetchDataFromGetQuestions[0].questions;
-//   const currentQuestion = currentQuestionSet[currentQuestionIndex];
-
-//   const handleAnswerClick = () => {
-//     if (currentQuestionIndex < currentQuestionSet.length - 1) {
-//       setCurrentQuestionIndex(currentQuestionIndex + 1);
-//     }
-//   };
-
-//   return (
-//     <div style={pageStyles}>
-//       <div style={titleStyles}>
-//         <h2>Perficient Quiz zone</h2>
-//       </div>
-//       <div style={cardStyles}>
-//         <h4>{currentQuestion.text}</h4>
-//         <div>
-//           {currentQuestion.options.map((option) => (
-//             <button
-//               key={option.id}
-//               className="answer-button"
-//               onClick={handleAnswerClick}
-//               style={customStyleBtn}
-//             >
-//               {option.text}
-//             </button>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 
 class Questions_Component extends React.Component {
   state = {
-    questions: [],
+    response: {},
     currentQuestionIndex: 0,
+    currentQuestionSet: 0
+  };
+  updateCurrentQuestionSetIndex = (currentQuestionSet) => {
+    this.setState({ currentQuestionSet });
   };
   updateCurrentQuestionIndex = (currentQuestionIndex) => {
     this.setState({ currentQuestionIndex });
   };
-  updateQuestions = (questions) => {
-    this.setState({ questions });
+  updateResponse = (response) => {
+    this.setState({ response });
   };
 
+
+
   getUserAuthenticated = () => {
-    const fetchDataFromGetQuestions = [
-      {
-        amount: 2,
-        questions: [
-          {
-            id: 1,
-            text: "pregunta 1",
-            options: [
-              {
-                id: 1,
-                text: "respuesta incorrecta a pregunta 1",
-              },
-              {
-                id: 2,
-                text: "respuesta correcta a pregunta 1",
-              },
-            ],
-          },
-          {
-            id: 2,
-            text: "pregunta 2",
-            options: [
-              {
-                id: 3,
-                text: "respuesta incorrecta a pregunta 2",
-              },
-              {
-                id: 4,
-                text: "respuesta correcta a pregunta 2",
-              },
-            ],
-          },
-          {
-            id: 3,
-            text: "pregunta 3",
-            options: [
-              {
-                id: 5,
-                text: "respuesta incorrecta a pregunta 3",
-              },
-              {
-                id: 6,
-                text: "respuesta correcta a pregunta 3",
-              },
-            ],
-          },
-          {
-            id: 4,
-            text: "pregunta 4",
-            options: [
-              {
-                id: 7,
-                text: "respuesta incorrecta a pregunta 4",
-              },
-              {
-                id: 8,
-                text: "respuesta correcta a pregunta 4",
-              },
-            ],
-          },
-        ],
-      },
-    ];
 
-    const getQuestions = () => {
-      let apiName = "KahootCloneAPI";
-      let path = "/questions";
-
-      API.get(apiName, path)
-        .then((response) => {
-          this.updateQuestions();
-          this.updateCurrentQuestionIndex(
-            response.questions.length() -
-              response.game_status.remaining_questions
-          );
-        })
-        .catch((error) => {});
-    };
 
     Auth.currentAuthenticatedUser()
       .then((result) => {
-        // this.setState({errorMessage: null, currentState: 'showQuestions'})
         console.log("User Signed In", result);
       })
       .catch((error) => {
@@ -257,13 +102,94 @@ class Questions_Component extends React.Component {
     let apiName = "KahootCloneAPI";
     let path = "/questions";
 
+    console.log("getQuestions")
+
     API.get(apiName, path)
       .then((response) => {
-        const responseData = response;
-        this.updateQuestions(response);
+
+        if (response.game_status.remaining_questions === 0) {
+          navigate("/score_page")
+        } else {
+          const responseData = response;
+          this.updateResponse(response);
+          this.updateCurrentQuestionIndex(
+            response.amount -
+            response.game_status.remaining_questions
+          );
+          this.updateCurrentQuestionSetIndex(response.amount)
+          this.startTime()
+        }
       })
-      .catch((error) => {});
+      .catch((error) => {
+
+        console.log(error)
+
+        if (error.response.data.error === 'GameNotConfigured') {
+          alert("El juego aún no ha comenzado")
+        } else if (error.response.data.error === 'GameFinished') {
+          console.log("GameFinished")
+          navigate("/score_page")
+        }
+
+      });
   };
+
+  postAnswer = (questionId, optionId) => {
+
+    let startTime = localStorage.getItem("timeStart")
+    let endtime = this.endtime()
+
+    let apiName = "KahootCloneAPI";
+    let path = "/answers";
+    let myInit = {
+      body: {
+        option_id: optionId,
+        question_id: questionId,
+        start: startTime,
+        end: endtime
+      }
+    }
+
+    API.post(apiName, path, myInit)
+      .then((response) => {
+        this.handleAnswerClick()
+      })
+      .catch((error) => {
+        if (error.response.data.error === 'GameNotConfigured') {
+          alert("El juego aún no ha comenzado")
+        } else if (error.response.data.error === 'GameFinished') {
+          console.log("GameFinished")
+          navigate("/score_page")
+        }
+      })
+  }
+
+  handleAnswerClick = () => {
+
+    const { currentQuestionIndex } = this.state;
+    const { currentQuestionSet } = this.state;
+
+    console.log(currentQuestionIndex)
+    console.log(currentQuestionSet)
+
+    if (currentQuestionIndex < currentQuestionSet - 1) {
+      this.updateCurrentQuestionIndex(currentQuestionIndex + 1);
+      this.startTime()
+    } else {
+      navigate("/score_page")
+    }
+  };
+
+  startTime = () => {
+    let timeStart = new Date()
+    localStorage.removeItem("timeStart")
+    localStorage.setItem("timeStart", timeStart.toISOString())
+  }
+
+  endtime = () => {
+    let timeEnd = new Date()
+    return timeEnd.toISOString()
+  }
 
   componentDidMount() {
     this.getUserAuthenticated();
@@ -275,30 +201,29 @@ class Questions_Component extends React.Component {
       display: "flex",
       margin: "auto",
     };
-    // this.getData()
 
-    const { questions } = this.state;
+    const { response } = this.state;
     const { currentQuestionIndex } = this.state;
-    console.log(
-      "🚀 ~ file: QuetsionCard_Component.js:281 ~ Questions_Component ~ render ~ currentQuestionIndex:",
-      currentQuestionIndex
-    );
 
     return (
       <div style={pageStyles}>
         <div style={titleStyles}>
           <img style={imageStyle} src={logo} alt="Logo" />
         </div>
-        {questions.questions != null ? (
+        {response.questions != null ? (
           <div className="board">
             <div>
-              {questions.questions[currentQuestionIndex]((question) => (
-                <div key={question.id}>
-                  <h3>{question.text}</h3>
-                  {question.options.map((option) => (
-                    <button key={option.id}>{option.text}</button>
-                  ))}
-                </div>
+              {response.questions.map((question, index) => (
+                index === currentQuestionIndex ? (
+                  <div key={question.id - 1}>
+                    <h3 key={`header_${question.id}`}>{question.text}</h3>
+                    {question.options.map((option) => (
+                      <button style={customStyleBtn} key={option.id} onClick={() => this.postAnswer(question.id, option.id)}>{option.text}</button>
+                    ))}
+                  </div>
+                ) : (
+                  <div key={Math.random()} />
+                )
               ))}
             </div>
           </div>

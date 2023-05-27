@@ -9,7 +9,6 @@ class SignUp_Component extends React.Component {
     username: '',
     password: '',
     email: '',
-    // phone_number: '',
     authCode: '',
     showConfirmation: false
   }

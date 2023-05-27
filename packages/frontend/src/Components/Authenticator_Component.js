@@ -5,7 +5,6 @@ import SignIn from "./SignIn_Component";
 import SignUp from "./SignUp_Component";
 import { navigate } from "gatsby";
 
-// import ForgotPassword from './ForgotPassword'
 
 class Authenticator_Component extends React.Component {
   state = {
@@ -24,18 +23,14 @@ class Authenticator_Component extends React.Component {
   getUserAuthenticated = () => {
     Auth.currentAuthenticatedUser()
       .then((result) => {
-        // this.setState({errorMessage: null, currentState: 'showQuestions'})
-        console.log("User Signed In", result);
         this.updateErrorMessage("User Signed In");
         navigate("/questions_page");
-        // navigate("/score_page");
       })
       .catch((error) => {
         console.log("error getting current session...: ", error);
       });
   };
 
-  // getUserAuthenticated()
 
   componentDidMount() {
     this.getUserAuthenticated();
@@ -59,7 +54,6 @@ class Authenticator_Component extends React.Component {
             switchState={this.switchState}
           />
         )}
-        {/* { currentState === 'showForgotPassword' && <ForgotPassword switchState={this.switchState} {...this.props} updateErrorMessage={this.updateErrorMessage} /> } */}
         <div {...css(styles.buttonContainer)}>
           {currentState === "showSignIn" ? (
             <div {...css(styles.linkContainer)}>
@@ -69,10 +63,6 @@ class Authenticator_Component extends React.Component {
               >
                 Necesitas una cuenta? Crea una aquí
               </p>
-              {/* <p
-                  onClick={() => this.switchState('showForgotPassword')}
-                  {...css(styles.toggle)}
-                >Forgot your password?</p> */}
             </div>
           ) : (
             <div {...css(styles.linkContainer)}>

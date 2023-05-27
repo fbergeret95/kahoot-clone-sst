@@ -17,7 +17,6 @@ class Score_Component extends React.Component {
   getUserAuthenticated = () => {
     Auth.currentAuthenticatedUser()
       .then((result) => {
-        // this.setState({errorMessage: null, currentState: 'showQuestions'})
         console.log("User Signed In", result);
       })
       .catch((error) => {
@@ -34,7 +33,7 @@ class Score_Component extends React.Component {
         console.log(response);
         this.updateScores(response);
       })
-      .catch((error) => {});
+      .catch((error) => { });
   };
 
   componentDidMount() {
@@ -47,7 +46,6 @@ class Score_Component extends React.Component {
       display: "flex",
       margin: "auto",
     };
-    // this.getData()
 
     const { currentScores } = this.state;
 

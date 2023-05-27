@@ -2,6 +2,7 @@ import React from 'react'
 import { css } from 'glamor'
 import { Auth } from 'aws-amplify'
 import UserContext from './UserContext'
+import { navigate } from "gatsby";
 
 class SignIn extends React.Component {
   state = {
@@ -26,9 +27,7 @@ class SignIn extends React.Component {
         if (!user.signInUserSession) {
           this.setState({ user, showConfirmation: true })
         } else {
-          // updateCurrentUser(user)
-          this.props.updateErrorMessage('User Signed In')
-          // history.push('/profile')
+          navigate("/questions_page")
         }
       })
       .catch(err => {
@@ -40,7 +39,7 @@ class SignIn extends React.Component {
     const { history } = this.props
     Auth.confirmSignIn(this.state.user, this.state.authCode, this.state.user.challengeName)
       .then(user => {
-        history.push('/')
+        navigate("/questions_page")
       })
       .catch(err => console.log('error confirming signing in...: ', err))
   }
