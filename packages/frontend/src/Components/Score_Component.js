@@ -1,80 +1,70 @@
 import React from "react";
-import { navigate } from 'gatsby'
-import { Auth } from 'aws-amplify'
-import { API } from 'aws-amplify';
+import { navigate } from "gatsby";
+import { Auth } from "aws-amplify";
+import { API } from "aws-amplify";
 import Leaderboard from "./Leaderboard_Component";
-import logo from "../images/perficient_logo.png"
+import logo from "../images/perficient_logo.png";
 
 class Score_Component extends React.Component {
+  state = {
+    currentScores: [],
+  };
 
-    state = {
-        currentScores: []
-    }
+  updateScores = (currentScores) => {
+    this.setState({ currentScores });
+  };
 
-    updateScores = currentScores => {
-        this.setState({ currentScores })
-    }
+  getUserAuthenticated = () => {
+    Auth.currentAuthenticatedUser()
+      .then((result) => {
+        // this.setState({errorMessage: null, currentState: 'showQuestions'})
+        console.log("User Signed In", result);
+      })
+      .catch((error) => {
+        navigate("/");
+      });
+  };
 
-    getUserAuthenticated = () => {
-        Auth.currentAuthenticatedUser()
-            .then(result => {
-                // this.setState({errorMessage: null, currentState: 'showQuestions'})
-                console.log('User Signed In', result)
-            })
-            .catch(error => {
-                navigate("/")
-            })
-    }
+  getData = () => {
+    let apiName = "KahootCloneAPI";
+    let path = "/results";
 
-    getData = () => {
+    API.get(apiName, path)
+      .then((response) => {
+        console.log(response);
+        this.updateScores(response);
+      })
+      .catch((error) => {});
+  };
 
-        let apiName = 'KahootCloneAPI';
-        let path = '/results';
+  componentDidMount() {
+    this.getUserAuthenticated();
+    this.getData();
+  }
 
-        API.get(apiName, path)
-            .then((response) => {
-                console.log(response)
-                this.updateScores(response)
-            })
-            .catch((error) => {
+  render() {
+    const imageStyle = {
+      display: "flex",
+      margin: "auto",
+    };
+    // this.getData()
 
-            })
-    }
+    const { currentScores } = this.state;
 
-    componentDidMount() {
-        this.getUserAuthenticated()
-        this.getData()
-    }
-
-
-    render() {
-
-
-        const imageStyle = {
-            display: "flex",
-            margin: "auto"
-        }
-        // this.getData()
-
-        const { currentScores } = this.state
-
-        return (
-            <div>
-                {currentScores !== null ? (
-                    <div className="board">
-                        <img style={imageStyle} src={logo} alt="Logo" />
-                        <h1 className='leaderboard'>Tabla de clasificación</h1>
-                        <Leaderboard Ranking={currentScores}></Leaderboard>
-                    </div>
-
-                ) : (
-                    <div />
-                )
-                }
-            </div>
-        )
-    }
-
+    return (
+      <div>
+        {currentScores !== null ? (
+          <div className="board">
+            <img style={imageStyle} src={logo} alt="Logo" />
+            <h1 className="leaderboard">Tabla de clasificación</h1>
+            <Leaderboard Ranking={currentScores}></Leaderboard>
+          </div>
+        ) : (
+          <div />
+        )}
+      </div>
+    );
+  }
 }
 
-export default Score_Component
+export default Score_Component;

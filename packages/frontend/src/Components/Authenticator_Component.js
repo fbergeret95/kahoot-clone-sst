@@ -27,8 +27,8 @@ class Authenticator_Component extends React.Component {
         // this.setState({errorMessage: null, currentState: 'showQuestions'})
         console.log("User Signed In", result);
         this.updateErrorMessage("User Signed In");
-        // navigate("/questions_page")
-        navigate("/score_page");
+        navigate("/questions_page");
+        // navigate("/score_page");
       })
       .catch((error) => {
         console.log("error getting current session...: ", error);

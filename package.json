@@ -22,6 +22,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@babel/runtime": "^7.22.0",
     "@middy/core": "^4.4.3",
     "@middy/http-json-body-parser": "^4.4.3",
     "@middy/validator": "^4.4.3",
