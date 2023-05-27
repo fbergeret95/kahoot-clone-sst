@@ -1,8 +1,9 @@
 import React from 'react'
 import { css } from 'glamor'
 import { navigate } from 'gatsby'
-
 import { Auth } from 'aws-amplify'
+import { Hub } from 'aws-amplify';
+
 
 class SignUp_Component extends React.Component {
   state = {
@@ -17,6 +18,21 @@ class SignUp_Component extends React.Component {
       [key]: value
     })
   }
+
+  listenToAutoSignInEvent() {
+    Hub.listen('auth', ({ payload }) => {
+      const { event } = payload;
+      if (event === 'autoSignIn') {
+        const user = payload.data;
+        console.log("AutoSignIn")
+        navigate("/questions_page")
+      } else if (event === 'autoSignIn_failure') {
+        // redirect to sign in page
+        console.log("AutoSignIn Error")
+      }
+    })
+  }
+
   signUp = () => {
     const { username, password, email } = this.state
 
@@ -25,9 +41,15 @@ class SignUp_Component extends React.Component {
       password,
       attributes: {
         email
+      },
+      autoSignIn: { // optional - enables auto sign in after user is confirmed
+        enabled: true,
       }
     })
-      .then(() => this.setState({ showConfirmation: true }))
+      .then(() => {
+        this.listenToAutoSignInEvent()
+        this.setState({ showConfirmation: true })
+      })
       .catch(err => {
         console.log('error signing up: ', err)
         this.props.updateErrorMessage(err.message)
@@ -35,9 +57,18 @@ class SignUp_Component extends React.Component {
   }
   confirmSignUp = () => {
     Auth.confirmSignUp(this.state.username, this.state.authCode)
-      .then(() => navigate("/questions_page"))
-      .catch(err => console.log('error confirming signing up: ', err))
+      .then(() => {
+        console.log("Succesfull confirmation")
+      }
+      )
+      .catch(err => {
+        console.log("Failed confirmation")
+        console.log('error confirming signing up: ', err)
+      })
   }
+
+
+
   render() {
     const { showConfirmation } = this.state
     return (
