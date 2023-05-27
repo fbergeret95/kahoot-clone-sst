@@ -154,6 +154,10 @@ const buttonStyles = {
 class Questions_Component extends React.Component {
   state = {
     questions: [],
+    currentQuestionIndex: 0,
+  };
+  updateCurrentQuestionIndex = (currentQuestionIndex) => {
+    this.setState({ currentQuestionIndex });
   };
   updateQuestions = (questions) => {
     this.setState({ questions });
@@ -231,6 +235,10 @@ class Questions_Component extends React.Component {
       API.get(apiName, path)
         .then((response) => {
           this.updateQuestions();
+          this.updateCurrentQuestionIndex(
+            response.questions.length() -
+              response.game_status.remaining_questions
+          );
         })
         .catch((error) => {});
     };
@@ -270,6 +278,11 @@ class Questions_Component extends React.Component {
     // this.getData()
 
     const { questions } = this.state;
+    const { currentQuestionIndex } = this.state;
+    console.log(
+      "🚀 ~ file: QuetsionCard_Component.js:281 ~ Questions_Component ~ render ~ currentQuestionIndex:",
+      currentQuestionIndex
+    );
 
     return (
       <div style={pageStyles}>
@@ -279,7 +292,7 @@ class Questions_Component extends React.Component {
         {questions.questions != null ? (
           <div className="board">
             <div>
-              {questions.questions.map((question) => (
+              {questions.questions[currentQuestionIndex]((question) => (
                 <div key={question.id}>
                   <h3>{question.text}</h3>
                   {question.options.map((option) => (
