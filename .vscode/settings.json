@@ -1,0 +1,14 @@
+{
+  "search.exclude": {
+    "**/.sst": true
+  },
+  "cSpell.words": [
+    "kahoot"
+  ],
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.build": true,
+    "**/node_modules": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "kahoot-clone-sst",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sst dev",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit",
+    "web:install": "npm i -w frontend",
+    "web:dev": "npm run develop -w frontend",
+    "gen": "hygen"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.4",
+    "@types/aws-lambda": "^8.10.115",
+    "aws-cdk-lib": "2.72.1",
+    "constructs": "10.1.156",
+    "hygen": "^6.2.11",
+    "sst": "^2.8.21",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.0",
+    "@middy/core": "^4.4.3",
+    "@middy/http-json-body-parser": "^4.4.3",
+    "@middy/validator": "^4.4.3",
+    "aws-cli": "^0.0.2",
+    "aws-sdk": "^2.1383.0",
+    "gatsby": "^5.9.1",
+    "glamor": "^2.20.40",
+    "kysely": "^0.24.2",
+    "kysely-data-api": "^0.2.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "description": "A simple quiz app inspired by [Kahoot](https://kahoot.it/) and built on SST with Gatsby."
+}
