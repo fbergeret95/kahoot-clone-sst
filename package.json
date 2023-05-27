@@ -10,6 +10,8 @@
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
+    "web:install": "npm i -w frontend",
+    "web:dev": "npm run develop -w frontend",
     "gen": "hygen"
   },
   "devDependencies": {
