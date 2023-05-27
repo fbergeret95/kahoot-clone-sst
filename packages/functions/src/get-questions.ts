@@ -13,12 +13,9 @@ type GetQuestionsRequest = Omit<
   "body"
 >;
 
-const lambda = async (
-  event: GetQuestionsRequest
-): Promise<APIGatewayProxyResult> => {
+const lambda = async (event: GetQuestionsRequest): Promise<APIGatewayProxyResult> => {
   const claims = event.requestContext.authorizer.jwt.claims;
-  const username =
-    (claims["cognito:username"] as string) || (claims["username"] as string);
+  const username = (claims['cognito:username'] || claims['username']) as string;
   const questions = await getQuestions(username);
   return {
     statusCode: 200,

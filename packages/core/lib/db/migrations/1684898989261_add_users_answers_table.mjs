@@ -1,5 +1,4 @@
 import { Kysely } from "kysely";
-
 /**
  * @param db {Kysely<any>}
  */
