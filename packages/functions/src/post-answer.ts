@@ -15,7 +15,8 @@ type PostAnswerRequest = Omit<APIGatewayProxyEventV2WithJWTAuthorizer, 'body'> &
 };
 
 const lambda = async (event: PostAnswerRequest): Promise<APIGatewayProxyResult> => {
-  const username = event.requestContext.authorizer.jwt.claims['cognito:username'] as string;
+  const claims = event.requestContext.authorizer.jwt.claims;
+  const username = (claims['cognito:username'] || claims['username']) as string;
   const game_status = await createAnswer({ ...event.body, username })
 
   return {
