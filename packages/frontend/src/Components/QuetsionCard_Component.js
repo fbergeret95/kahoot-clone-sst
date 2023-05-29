@@ -16,12 +16,8 @@ const titleStyles = {
 };
 const cardStyles = {
   textAlign: "center",
-  paddingTop: "1%",
-  paddingBottom: "2%",
-  backgroundColor: "#C0392B",
-  marginLeft: "25%",
-  marginRight: "25%",
-  borderRadius: "8px",
+  width: "50%",
+  marginLeft: "25"
 };
 const customStyleBtn = {
   padding: "8px 16px",
@@ -213,7 +209,7 @@ class Questions_Component extends React.Component {
           <img style={imageStyle} src={logo} alt="Logo" />
         </div>
         {response.questions != null ? (
-          <div className="board">
+          <div className="board" style={cardStyles}>
             <div>
               {response.questions.map((question, index) => (
                 index === currentQuestionIndex ? (

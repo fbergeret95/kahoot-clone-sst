@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "2cf399c3-296f-40f2-81b7-80090896dcb7",
+		"name": "Kahoot-Clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4834472",
+		"_collection_link": "https://gold-moon-244664.postman.co/workspace/ITBuilders~7f30e5f3-7324-42e5-af8e-3010511501b7/collection/4834472-2cf399c3-296f-40f2-81b7-80090896dcb7?action=share&creator=4834472&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Authorized Requests",
+			"item": [
+				{
+					"name": "Get Questions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/questions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"questions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/questions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"questions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 24 May 2023 03:48:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "312"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Apigw-Requestid",
+									"value": "FaJWRj9sCYcEJfQ="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"amount\": 2,\n    \"questions\": [\n        {\n            \"id\": 1,\n            \"text\": \"pregunta 1\",\n            \"options\": [\n                {\n                    \"id\": 1,\n                    \"text\": \"respuesta incorrecta a pregunta 1\"\n                },\n                {\n                    \"id\": 2,\n                    \"text\": \"respuesta correcta a pregunta 1\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"text\": \"pregunta 2\",\n            \"options\": [\n                {\n                    \"id\": 3,\n                    \"text\": \"respuesta incorrecta a pregunta 2\"\n                },\n                {\n                    \"id\": 4,\n                    \"text\": \"respuesta correcta a pregunta 2\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Post Answer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let timeStart = new Date();",
+									"let timeEnd = new Date();",
+									"pm.variables.set(\"timeStart\", timeStart.toISOString())",
+									"let randomSeconds = Math.floor(Math.random() * 180) + 1; // get random number of seconds between 1 and 180",
+									"timeEnd.setSeconds(timeStart.getSeconds() + randomSeconds);",
+									"pm.variables.set(\"timeEnd\", timeEnd.toISOString())",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"question_id\": 1,\n    \"option_id\": 1 ,\n    \"start\": \"{{timeStart}}\",\n    \"end\": \"{{timeEnd}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/answers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"answers"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question_id\": 1,\n    \"option_id\": 1 ,\n    \"start\": \"2023-05-25T19:52:20.794Z\",\n    \"end\": \"2023-05-25T19:54:41.794Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/answers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 25 May 2023 19:52:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Apigw-Requestid",
+									"value": "FfpiWi5eiYcEMow="
+								}
+							],
+							"cookie": [],
+							"body": "{}"
+						},
+						{
+							"name": "400 AlreadyExists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question_id\": 1,\n    \"option_id\": 1 ,\n    \"start\": \"2023-05-25T19:52:20.794Z\",\n    \"end\": \"2023-05-25T19:54:41.794Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/answers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"answers"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 25 May 2023 19:55:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Apigw-Requestid",
+									"value": "FfqEKiMbiYcEMcw="
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"DuplicateError\",\n    \"message\": \"Entity already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Results",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/results",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{sessionToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Login Cognito",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test( \"Login Origin Kashtag\", () => {",
+							"    pm.expect( pm.response.code ).to.eql( 200 )",
+							"",
+							"    const response = JSON.parse( responseBody )",
+							"",
+							"    const sessionToken = response.AuthenticationResult.IdToken",
+							"",
+							"    pm.environment.set( \"sessionToken\", sessionToken )",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-amz-json-1.1",
+						"type": "text"
+					},
+					{
+						"key": "X-Amz-Target",
+						"value": "AWSCognitoIdentityProviderService.InitiateAuth",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"AuthFlow\": \"USER_PASSWORD_AUTH\",\n    \"AuthParameters\": {\n        \"USERNAME\": \"{{username}}\",\n        \"PASSWORD\": \"{{password}}\"\n    },\n    \"ClientId\": \"{{cognitoClientId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{cognitoUrl}}",
+					"host": [
+						"{{cognitoUrl}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
