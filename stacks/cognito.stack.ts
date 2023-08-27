@@ -24,6 +24,7 @@ export const CognitoStack = ({ stack, app }: StackContext) => {
       },
     },
     triggers: {
+      preSignUp: 'packages/functions/src/user-registering.handler',
       postConfirmation: 'packages/functions/src/user-registered.handler',
     },
     defaults: {
