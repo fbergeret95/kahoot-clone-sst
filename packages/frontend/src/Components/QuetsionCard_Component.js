@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { navigate } from "gatsby";
 
+
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+
+
 import logo from "../images/perficient_logo.png";
 import { Amplify, Auth } from "aws-amplify";
 
@@ -204,21 +208,37 @@ class Questions_Component extends React.Component {
     const { currentQuestionIndex } = this.state;
 
     return (
+      <>
       <div style={pageStyles}>
         <div style={titleStyles}>
           <img style={imageStyle} src={logo} alt="Logo" />
         </div>
         {response.questions != null ? (
           <div className="board" style={cardStyles}>
-            <div>
+            <div className="text-center">
               {response.questions.map((question, index) => (
                 index === currentQuestionIndex ? (
-                  <div key={question.id - 1}>
+                  
+                  <>
+                  <div key={question.id - 1} >
                     <h3 key={`header_${question.id}`}>{question.text}</h3>
+                    {/* {question.options.map((option) => (
+                          // <button  className="card text-white bg-danger mb-3 text-center"  key={option.id} onClick={() => this.postAnswer(question.id, option.id)}>{option.text}</button>      
+                          <button type="button" className="btn btn-outline-danger" key={option.id} onClick={() => this.postAnswer(question.id, option.id)}>{option.text}</button>
+
+                    ))} */}
                     {question.options.map((option) => (
-                      <button style={customStyleBtn} key={option.id} onClick={() => this.postAnswer(question.id, option.id)}>{option.text}</button>
+                        <div className="text-center row p-2">
+                          <div className="col">
+                          <button type="button" className="btn btn-outline-danger btn-block" key={option.id} onClick={() => this.postAnswer(question.id, option.id)}>{option.text}</button>
+                          </div>
+                        </div>
                     ))}
+
+
                   </div>
+                  
+                  </>
                 ) : (
                   <div key={Math.random()} />
                 )
@@ -229,6 +249,9 @@ class Questions_Component extends React.Component {
           <div />
         )}
       </div>
+      
+     
+      </>
     );
   }
 }

@@ -13,7 +13,9 @@ function Item(data) {
         <>
             {
                 data.map((value, index) => (
-                    <div className="flex" key={index}>
+                   <>
+                    <div className='container p-2'>
+                        <div className='row' key={index}>
                         <div className="item">
                             <div className="info">
                                 <h3 className='name text-dark'>{value.username}</h3>
@@ -23,7 +25,9 @@ function Item(data) {
                         <div className="item">
                             <span>correctas: {value.score}</span>
                         </div>
+                        </div>
                     </div>
+                   </>
                 )
                 )
             }

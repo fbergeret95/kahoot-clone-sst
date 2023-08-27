@@ -54,3 +54,14 @@ ORDER BY
   score DESC,
   time ASC;
 
+
+
+-- DELETE PARA RESETEAR JUEGO -- 
+
+DELETE FROM control;
+
+DELETE FROM answers;
+
+DELETE FROM options;
+
+DELETE FROM questions;
