@@ -46,10 +46,10 @@ class SignIn extends React.Component {
   }
   render() {
     return (
-      <div {...css(styles.container)}>
+      <div className='' {...css(styles.container)}>
         {
           !this.state.showConfirmation && (
-            <div {...css(styles.formContainer)}>
+            <div className='p-5' {...css(styles.formContainer)}>
               <h2 {...css(styles.signInHeader)}>Iniciar Sesión</h2>
               <input
                 onChange={evt => this.onChange('username', evt.target.value)}

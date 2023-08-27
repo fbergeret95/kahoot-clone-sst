@@ -5,6 +5,9 @@ import SignIn from "./SignIn_Component";
 import SignUp from "./SignUp_Component";
 import { navigate } from "gatsby";
 
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+
+
 
 class Authenticator_Component extends React.Component {
   state = {

@@ -50,6 +50,7 @@ class Score_Component extends React.Component {
     const { currentScores } = this.state;
 
     return (
+      <>
       <div>
         {currentScores !== null ? (
           <div className="board">
@@ -61,6 +62,8 @@ class Score_Component extends React.Component {
           <div />
         )}
       </div>
+      
+      </>
     );
   }
 }
