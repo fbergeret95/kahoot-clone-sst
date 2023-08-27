@@ -12,6 +12,8 @@ export const CognitoStack = ({ stack, app }: StackContext) => {
       userPool: {
         // Retain cognito instance in production only
         removalPolicy: isProduction() ? RemovalPolicy.RETAIN : RemovalPolicy.DESTROY,
+        // Disable Email confirmation
+        selfSignUpEnabled: true,
       },
       userPoolClient: {
         authFlows: {

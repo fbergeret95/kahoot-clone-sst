@@ -8,5 +8,9 @@
     "us-east-2a",
     "us-east-2b",
     "us-east-2c"
+  ],
+  "availability-zones:account=534552871162:region=us-west-1": [
+    "us-west-1a",
+    "us-west-1b"
   ]
 }
