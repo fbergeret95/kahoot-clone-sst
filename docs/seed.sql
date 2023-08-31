@@ -23,6 +23,7 @@ INSERT INTO users(username, email, sub)
 ('test2', 'test2@test.com', 'testSub2'),
 ('test3', 'test3@test.com', 'testSub3');
 
+
 INSERT INTO answers(username, question_id, option_id, seconds)
   VALUES ('test1', 1, 1, 5),
 ('test1', 2, 7, 10),
