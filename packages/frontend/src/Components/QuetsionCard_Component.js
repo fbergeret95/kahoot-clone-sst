@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 import logo from "../images/perficient_logo.png";
 import { Amplify, Auth } from "aws-amplify";
+import { media } from "glamor";
 
 const pageStyles = {
   fontFamily: "Arial",
@@ -23,6 +24,19 @@ const cardStyles = {
   width: "50%",
   marginLeft: "25"
 };
+
+const mediaQueryStylescardStyles = {
+  '@media (max-width: 70000px)': {
+    minWidth: "700%",
+    marginLeft: "35%",
+  },
+  textAlign: "center",
+  width: "50%",
+  marginLeft: "25"
+};
+
+
+
 const customStyleBtn = {
   padding: "8px 16px",
   margin: "2%",
@@ -229,7 +243,7 @@ class Questions_Component extends React.Component {
                     ))} */}
                     {question.options.map((option) => (
                         <div className="text-center row p-2">
-                          <div className="col">
+                          <div className="d-grid gap-2">
                           <button type="button" className="btn btn-outline-danger btn-block" key={option.id} onClick={() => this.postAnswer(question.id, option.id)}>{option.text}</button>
                           </div>
                         </div>

@@ -32,7 +32,7 @@ const pageStyles = {
   color: "#232129",
   backgroundColor: "#FFFFFF",
   height: "1000px",
-  padding: 96,
+  // padding: 96,
   fontFamily: "-apple-system, Roboto, sans-serif, serif",
 };
 
