@@ -8,16 +8,22 @@ import logo from "../images/perficient_logo.png";
 class Score_Component extends React.Component {
   state = {
     currentScores: [],
+    authenticatedUser: null, // Agregar este estado
+
   };
+
+   
 
   updateScores = (currentScores) => {
     this.setState({ currentScores });
   };
 
-  getUserAuthenticated = () => {
+   getUserAuthenticated = () => {
     Auth.currentAuthenticatedUser()
       .then((result) => {
         console.log("User Signed In", result);
+        this.setState({ authenticatedUser: result }); // Almacenar el resultado en el estado
+
       })
       .catch((error) => {
         navigate("/");

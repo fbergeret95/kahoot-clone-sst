@@ -4,6 +4,9 @@ import FirstPositionImg from '../images/FirstPosition.png';
 import SecondPositionImg from '../images/SecondPosition.png';
 import ThirdPositionImg from '../images/ThirdPosition.png';
 
+import ScoreComponent from './Score_Component';
+
+
 export default function leaderboard({ Ranking }) {
     return (
         <div id="profile">
@@ -30,11 +33,16 @@ function getImageStyleByIndex(index) {
     return { width: '30%' }; 
 }
 
+
+
 function Item(data) {
+    const displayPodio = data.slice(0, 3); // Obtener los primeros tres elementos del arreglo
+    const displayRestOfInfo = data.slice(3, 9)
+
     return (
         <>
            <div className='row'>
-           {data.map((value, index) => (
+           {displayPodio.map((value, index) => (
                 <div className=" p-2 mb-3 mx-auto my-auto col-lg-4" key={index}>
                     <img
                         className="card-img-top mx-auto"
@@ -50,7 +58,21 @@ function Item(data) {
                     <hr className='mx-auto' style={{ width: '50%' }} />
                 </div>
             ))}
+            {displayRestOfInfo.map((value, index) => (
+                <div className=" p-2 mb-3 mx-auto my-auto " key={index}>
+                    <div className="card-body">
+                        
+                        <strong><h3>{value.username}</h3></strong>
+                        <h5 className="card-title"><strong>{value.time}</strong> Segundos</h5>
+                        <p className="card-text">Correctas: <strong>{value.score}</strong></p>
+                    </div>
+                    <hr className='mx-auto' style={{ width: '20%' }} />
+                </div>
+                
+            ))}
+            
             </div>
+            
         </>
     );
 }
