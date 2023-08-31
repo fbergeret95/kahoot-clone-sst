@@ -133,8 +133,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     borderRadius: 20,
-    borderStyle: 'solid',
-    borderColor: '#4c4c4c'
+    // borderStyle: 'solid',
+    // borderColor: '#4c4c4c'
   }
 }
 

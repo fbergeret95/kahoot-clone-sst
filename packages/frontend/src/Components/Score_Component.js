@@ -53,7 +53,7 @@ class Score_Component extends React.Component {
       <>
       <div>
         {currentScores !== null ? (
-          <div className="board">
+          <div className="text-center mx-auto">
             <img style={imageStyle} src={logo} alt="Logo" />
             <h1 className="leaderboard">Tabla de clasificación</h1>
             <Leaderboard Ranking={currentScores}></Leaderboard>
