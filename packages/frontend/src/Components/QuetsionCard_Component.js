@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { API } from "aws-amplify";
 import { navigate } from "gatsby";
 
@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 import logo from "../images/perficient_logo.png";
 import { Amplify, Auth } from "aws-amplify";
-import { media } from "glamor";
+
 
 const pageStyles = {
   fontFamily: "Arial",
@@ -25,37 +25,37 @@ const cardStyles = {
   marginLeft: "25"
 };
 
-const mediaQueryStylescardStyles = {
-  '@media (max-width: 70000px)': {
-    minWidth: "700%",
-    marginLeft: "35%",
-  },
-  textAlign: "center",
-  width: "50%",
-  marginLeft: "25"
-};
+// const mediaQueryStylescardStyles = {
+//   '@media (max-width: 70000px)': {
+//     minWidth: "700%",
+//     marginLeft: "35%",
+//   },
+//   textAlign: "center",
+//   width: "50%",
+//   marginLeft: "25"
+// };
 
 
 
-const customStyleBtn = {
-  padding: "8px 16px",
-  margin: "2%",
-  minWidth: "400px",
-  borderRadius: "9999px",
-  backgroundColor: "#EC7063",
-  color: "#fff",
-  fontWeight: "bold",
-  fontSize: "14px",
-  border: "none",
-  cursor: "pointer",
-  transition: "background-color 0.3s",
-};
+// const customStyleBtn = {
+//   padding: "8px 16px",
+//   margin: "2%",
+//   minWidth: "400px",
+//   borderRadius: "9999px",
+//   backgroundColor: "#EC7063",
+//   color: "#fff",
+//   fontWeight: "bold",
+//   fontSize: "14px",
+//   border: "none",
+//   cursor: "pointer",
+//   transition: "background-color 0.3s",
+// };
 
 
 
-const buttonStyles = {
-  backgroundColor: "white",
-};
+// const buttonStyles = {
+//   backgroundColor: "white",
+// };
 
 Amplify.configure({
   Auth: {
@@ -124,7 +124,7 @@ class Questions_Component extends React.Component {
         if (response.game_status.remaining_questions === 0) {
           navigate("/score_page")
         } else {
-          const responseData = response;
+          
           this.updateResponse(response);
           this.updateCurrentQuestionIndex(
             response.amount -
